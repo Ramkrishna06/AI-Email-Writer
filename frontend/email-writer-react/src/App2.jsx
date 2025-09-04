@@ -109,10 +109,15 @@ const handleSubmit = async () => {
   setLoading(true);
   setError('');
   try {
-    const response = await axios.post(`${API_BASE_URL}/api/email/generate`, {
-      emailContent,
-      tone,
-    });
+    // const response = await axios.post(`${API_BASE_URL}/api/email/generate`, {
+    //   emailContent,
+    //   tone,
+    // });/
+    const response = await axios.post(
+  'https://mailreply-ai.onrender.com/api/email/generate',
+  { emailContent, tone }
+);
+
     setGeneratedReply(
       typeof response.data === 'string' ? response.data : JSON.stringify(response.data)
     );
