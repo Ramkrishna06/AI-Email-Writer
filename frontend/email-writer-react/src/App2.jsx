@@ -85,23 +85,44 @@ function App() {
     document.body.className = darkMode ? 'dark-mode' : 'light-mode';
   }, [darkMode]);
 
-  const handleSubmit = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const response = await axios.post('http://localhost:8080/api/email/generate', {
-        emailContent,
-        tone,
-      });
-      setGeneratedReply(
-        typeof response.data === 'string' ? response.data : JSON.stringify(response.data)
-      );
-    } catch (error) {
-      setError('Failed to get response email. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const handleSubmit = async () => {
+  //   setLoading(true);
+  //   setError('');
+  //   try {
+  //     const response = await axios.post('http://localhost:8080/api/email/generate', {
+  //       emailContent,
+  //       tone,
+  //     });
+  //     setGeneratedReply(
+  //       typeof response.data === 'string' ? response.data : JSON.stringify(response.data)
+  //     );
+  //   } catch (error) {
+  //     setError('Failed to get response email. Please try again.');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+const handleSubmit = async () => {
+  setLoading(true);
+  setError('');
+  try {
+    const response = await axios.post(`${API_BASE_URL}/api/email/generate`, {
+      emailContent,
+      tone,
+    });
+    setGeneratedReply(
+      typeof response.data === 'string' ? response.data : JSON.stringify(response.data)
+    );
+  } catch (error) {
+    setError('Failed to get response email. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <ThemeProvider theme={theme}>
