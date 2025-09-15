@@ -197,7 +197,19 @@ const handleSubmit = async () => {
           >
             {loading ? <CircularProgress size={24} /> : 'Generate Reply'}
           </AnimatedButton>
+          
+           {/* ⏳ Loading Message */}
+          {loading && (
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              sx={{ mt: 1, textAlign: 'center' }}
+            >
+              Please wait at least 2 minutes — it may take some time for the free server to generate a response.
+            </Typography>
+          )}
         </Box>
+        
         {error && (
           <Typography color="error" sx={{ mt: 3 }} role="alert">
             {error}
